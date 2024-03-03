@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Marhey:wght@300..700&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <img src="images/book-log.jpg" alt="">
+            <span class="logo-name">Your<span style="color: rgb(221, 189, 47);">Book</span></span>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <div class="note">
+            <h3 id="book_title" > indian polity</h3>
+            <h4 id="book_author"> Hudson</h4>
+            <p id="book_des"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur, fuga eligendi! Rerum veniam, ipsum animi velit ad dicta corporis repudiandae eaque optio temporibus, voluptatum nam aperiam necessitatibus libero incidunt ducimus. </p>
+            <button onclick="delete_book(event)">Delete</button>
+        </div>
+    </div>
+
+    <div class="overlay"></div>
+    <div class="popup">
+        <h2 >Add Books</h2>
+        <input id="book_name" class="inpt" type="text" placeholder="Enter Book name"><br>
+        <input id="author" class="inpt" type="text" placeholder="Enter Autor name"><br>
+        <textarea id="description" class="inpt" name="comment" placeholder="Short description" >
+        </textarea>
+        <button onclick="adding()">Add</button>
+        <button onclick="hide_popup()">Cancel</button>
+    </div>
+
+    <!-- //plus button -->
+    <button class="plus" onclick=show()>+</button>
+     
+    <script>
+        //selecting book container, pop box, overlay
+        var note_cont =document.querySelector(".note")
+        var popup_cont =document.querySelector(".popup")
+        var blk_overlay = document.querySelector('.overlay')
+
+        //selecting input element in popop box
+        var book = document.getElementById('book_name')
+        var author = document.getElementById('author')
+        var descrp = document.getElementById('description')
+
+        function adding(){
+            var container = document.querySelector('.container') //selecting a contain to append the below items inside the container
+            var div = document.createElement("div")//create a div element inside the container
+            div.setAttribute("class","note")
+            div.innerHTML = `<h3>${book.value}</h3>
+                             <h4>${author.value}</h4>
+                             <p>${descrp.value}</p>
+                             <button onclick="delete_book(event)">Delete</button>`
+            container.append(div)
+
+            // Loop through each input element and set its value to an empty string
+            var input_elemnt = document.querySelectorAll('.inpt')
+            input_elemnt.forEach(function(input_elemnt) {
+                input_elemnt.value = '';
+            });
+
+            note_cont.style.display = "inline-block"
+            popup_cont.style.display = "none"
+            blk_overlay.style.display = "none"
+        }
+
+        function delete_book(event){
+            event.target.parentElement.remove() 
+        }
+
+        function hide_popup(){
+            popup_cont.style.display = "none"
+            blk_overlay.style.display = "none"
+        }
+
+        function show(){
+            popup_cont.style.display = "block"
+            blk_overlay.style.display = "block"
+        }
+
+        
+
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>
